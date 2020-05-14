@@ -147,6 +147,7 @@ def load_modules(mod_list):
     for mod in mod_list:
         if mod:
             mod_name = mod[0]
+            print("[*] Loading Module `{}`.".format(mod_name))
             mod_args = ''
             if len(mod) > 1:
                 mod_args = " ".join(mod[1:])
