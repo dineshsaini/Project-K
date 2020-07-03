@@ -48,21 +48,21 @@ class DirUtil:
 
     def get_dir_list(parent, recurse = False):
         l = []
-        for i in list_dir(parent):
+        for i in DirUtil.list_dir(parent):
             if os.path.isdir(i):
                 l += [i]
                 if recurse:
-                    l += get_dir_list(i, recurse)
+                    l += DirUtil.get_dir_list(i, recurse)
         return l
 
     def get_files_list(parent, recurse = False):
         l = []
-        for i in list_dir(parent):
+        for i in DirUtil.list_dir(parent):
             if os.path.isfile(i):
                 l += [i]
             else:
                 if recurse:
-                    l += get_files_list(i, recurse)
+                    l += DirUtil.get_files_list(i, recurse)
         return l
 
     def merge_dirs(source, dest):
@@ -100,6 +100,14 @@ class FileUtil:
         return FileUtil.create_random_file(FileUtil.join_names('/tmp/', \
                 dname), prefix)
 
+    def dump_list(ofile, l, append=True):
+        if l:
+            m = 'a'
+            if not append:
+                m = 'w'
+            with open(ofile, m) as f:
+                for i in l:
+                    f.write("{}\n".format(i))
 
 class Random:
     def rand_between(start, end):
